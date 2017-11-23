@@ -525,3 +525,25 @@ public class Solution {
     }
 }
 =======================================================================
+---INTRO TO TUTORIAL CHALLENGES---
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);        
+        int num = in.nextInt();
+        int arrSize = in.nextInt();      
+        Integer[] a = new Integer[arrSize];
+        for(int i=0;i<arrSize;i++){
+            a[i]=new Integer(in.nextInt());
+        }
+        
+        System.out.println(Arrays.asList(a).indexOf(num));
+    }
+}
