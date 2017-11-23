@@ -292,4 +292,236 @@ public class Solution {
     }
 }
 ==============================================================
+--MAX-SUB-ARRAY-SUM-----
 
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    static long maximumSum(long[] a, long m) {
+        
+        long max = 0l;
+        
+        for(int i=0;i<a.length;i++){
+            long sum = 0;    
+            for(int j=i;j<a.length;j++){
+                for(int k=i;k<=j;k++){                    
+                 sum+=a[k];
+                }  
+                if(m>0){
+                if(sum%m > max){
+                    max = sum%m;
+                }
+                }
+            }
+        }
+        
+        return max;
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int q = in.nextInt();
+        for(int a0 = 0; a0 < q; a0++){
+            int n = in.nextInt();
+            long m = in.nextLong();
+            long[] a = new long[n];
+            for(int a_i = 0; a_i < n; a_i++){
+                a[a_i] = in.nextLong();
+            }
+            long result = maximumSum(a, m);
+            System.out.println(result);
+        }
+        in.close();
+    }
+}
+=================================================================
+---PAIRS---
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    static int pairs(int[] a,int k) {
+     
+        int count = 0;
+        for(int i = 0; i< a.length; i++){
+            for(int j=i;j<a.length;j++)
+            if(Math.abs(a[i]-a[j]) == k){
+                count ++;
+            }
+        }        
+        return count;
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int res;
+        
+        String n = in.nextLine();
+        String[] n_split = n.split(" ");
+        
+        int _a_size = Integer.parseInt(n_split[0]);
+        int _k = Integer.parseInt(n_split[1]);
+        
+        int[] _a = new int[_a_size];
+        int _a_item;
+        String next = in.nextLine();
+        String[] next_split = next.split(" ");
+        
+        for(int _a_i = 0; _a_i < _a_size; _a_i++) {
+            _a_item = Integer.parseInt(next_split[_a_i]);
+            _a[_a_i] = _a_item;
+        }
+        
+        res = pairs(_a,_k);
+        System.out.println(res);
+    }
+}
+==================================================================================
+--MISSING-NUMBERS--
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+
+public class Solution {
+    
+    public static int[] findMissing(int[] a, int n,int[] b, int m){
+        
+        int[] missing = new int[m]; 
+        int [] result = new int[m-n]; 
+        
+        if(n-m!=0 ){        
+        
+        HashMap<Integer, Integer> mapA = new HashMap<Integer, Integer>();
+        HashMap<Integer, Integer> mapB = new HashMap<Integer, Integer>();
+            
+        for (int i : a) {            
+            if(mapA.containsKey(i))
+            {    
+                mapA.put(i, mapA.get(i)+1);
+            }
+            else
+            {    
+                mapA.put(i, 1);
+            }
+        }
+        //    System.out.println(mapA);
+        
+        for (int i : b) {            
+            if(mapB.containsKey(i))
+            {    
+                mapB.put(i, mapB.get(i)+1);
+            }
+            else
+            {    
+                mapB.put(i, 1);
+            }
+        }
+         //   System.out.println(mapB);
+        
+        
+        int i = 0;         
+         for (Integer key: mapB.keySet()){
+                if (!mapB.get(key).equals(mapA.get(key))){
+                    missing[i] = key;
+                    i++;
+                }
+         } 
+        
+        int s = 0;
+        for(int k : missing){
+            if(k>0){
+                result[s] = k;
+                s++;
+           }
+            
+        }
+        Arrays.sort(result);
+        
+        }
+        
+        
+        return result;
+        
+    }
+        
+
+    public static void main(String[] args) {
+         
+        
+        Scanner s = new Scanner(System.in);        
+       int n = s.nextInt();
+        int a[] = new int[n];        
+        for(int i = 0; i < n; i++)
+        {
+            a[i] = s.nextInt();
+        }
+        
+       int m = s.nextInt();
+        int b[] = new int[m];        
+        for(int i = 0; i < m; i++)
+        {
+            b[i] = s.nextInt();
+        }        
+         
+        int [] result = new int[Math.abs(b.length-a.length)];
+        
+        result = findMissing(a,n,b,m);
+        for(int i: result)    {
+            System.out.print(i+" ");
+        }
+        
+        
+        
+    }
+}
+===================================================================
+---BIG-SORTING---
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        String[] unsorted = new String[n];
+        for(int unsorted_i=0; unsorted_i < n; unsorted_i++){
+            unsorted[unsorted_i] = in.next();
+        }
+        
+        
+        
+        BigInteger[] arr = new BigInteger[unsorted.length];
+        
+        for(int i=0;i<unsorted.length;i++){
+            arr[i] = new BigInteger(unsorted[i]);
+        }
+        
+        Arrays.sort(arr);
+        
+        for(BigInteger k:arr){
+            System.out.println(k);    
+        }
+        
+        
+        
+        
+    }
+}
+=======================================================================
