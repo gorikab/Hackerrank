@@ -1,1 +1,62 @@
 ---------------------
+abcd;
+
+
+solution:
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    static int makingAnagrams(String s1, String s2){
+        char[] c1 = s1.toCharArray();
+        char[] c2 = s2.toCharArray();
+        Arrays.sort(c1);
+        Arrays.sort(c2);
+        
+        if(String.valueOf(c1).equals(String.valueOf(c2))){
+            return 0;
+        }
+        
+        int count = 0;
+        StringBuffer sb1 = new StringBuffer(String.valueOf(c1));
+        StringBuffer sb2 = new StringBuffer(String.valueOf(c2));
+        
+        for(int i=0;i<c1.length;i++){
+            for(int j=0;j<c2.length;j++){
+                if(c1[i] != c2[j]){
+                    sb1.deleteCharAt(i); 
+                    count++;
+                }
+            }
+        }
+        
+        for(int i=0;i<c2.length;i++){
+            for(int j=0;j<c1.length;j++){
+                if(c2[i] != c1[j]){
+                    sb2.deleteCharAt(i);                    
+                    count++;
+                }
+            }
+        }        
+        
+        return count;
+        
+        
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String s1 = in.next();
+        String s2 = in.next();
+        int result = makingAnagrams(s1, s2);
+        System.out.println(result);
+    }
+}
+----------------------------------------------
+
+
