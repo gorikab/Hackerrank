@@ -1,10 +1,293 @@
----------------------
-abcd;
+Strings:
+=======================================================
+----SUPER REDUCED STRING---
 
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
 
-solution:
+public class Solution {
 
+    static String super_reduced_string(String str){        
+       for (int i = 1; i < str.length(); i++) { 
+        if (str.charAt(i) == str.charAt(i - 1)) { 
+            str = str.substring(0, i - 1) + str.substring(i + 1); 
+            i = 0;
+        }
+    }
+        
+    if (str.length() == 0) {
+        return "Empty String";
+    } 
+        
+    return str;
+        
+    }
 
-----------------------------------------------
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String s = in.next();
+        String result = super_reduced_string(s);
+        System.out.println(result);
+    }
+}
 
+====================================================
+---CAMEL CASE--
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String s = in.next();
+        
+        char[] ch = s.toCharArray();
+        int count = 1;
+        for(int i = 0;i<ch.length;i++ ){
+            if(Character.isUpperCase(ch[i])){
+                count+=1;
+            }
+        }
+        System.out.println(count);
+    }
+}
+========================================================================
+---PANGRAMS---
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    public static void main(String args[] ) throws Exception {
+        Scanner in = new Scanner(System.in);        
+        String s = in.next();
+        
+        if(isPangram(s)){
+            System.out.println("pangram");
+        }else{
+            System.out.println("not pangram");
+        }
+        
+    }
+    
+    public static boolean isPangram(String s){
+        s = s.toLowerCase();
+        int count = 0;
+        for (char c = 'a'; c <= 'z'; c++) {
+            if (!s.contains(String.valueOf(c))) {
+                return false;
+            }
+            count++;
+        }
+        return count == 26;
+    }
+}
+==========================================================================
+---GEM STONES---
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    static int gemstones(String[] arr){
+        String s = arr[0];
+	     
+	        StringBuffer sb = new StringBuffer(s);
+	       char[] ch = new char[s.length()];
+	       char[] chr = new char[s.length()];
+	       int k = 0;
+	       
+	       for(int i=0;i<sb.length();i++) {
+	    	   int count = 0;
+	           for(int j=1;j<arr.length;j++){               
+	               if(arr[j].indexOf(s.charAt(i))>=0)
+	            	   count++;	               
+	           }
+	           if(count == arr.length-1){	        	   
+	        	 if(String.valueOf(chr).trim().indexOf(s.charAt(i))<0){
+	        		  chr[k] =  s.charAt(i);
+	        		  k++;
+	        	  }
+	           }
+	           
+	       }
+	     
+	       return String.valueOf(chr).trim().length();
+	    }
+    
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        String[] arr = new String[n];
+        for(int arr_i = 0; arr_i < n; arr_i++){
+            arr[arr_i] = in.next();
+        }
+        int result = gemstones(arr);
+        System.out.println(result);
+    }
+}
+====================================================================
+---ALTERNATING CHARECTERS---
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    static int alternatingCharacters(String s){
+        int count = 0;
+        StringBuffer sb = new StringBuffer(s);
+        	for(int i=1;i<sb.length();i++){
+        	if(sb.charAt(i)==sb.charAt(i-1)){
+                sb.deleteCharAt(i);
+                count++;
+                i=0;
+            }       
+        }
+        return count;
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int q = in.nextInt();
+        for(int a0 = 0; a0 < q; a0++){
+            String s = in.next();
+            int result = alternatingCharacters(s);
+            System.out.println(result);
+        }
+    }
+}
+========================================================
+---BEAUTIFUL BINARY STRING------
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    static int minSteps(int n, String B){
+    Pattern p = Pattern.compile("010");
+	Matcher m = p.matcher(B);
+	int count = 0;
+	while (m.find()){
+	    count +=1;
+	}
+	//System.out.println(count);
+	return count;
+        
+    } 
+    
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        String B = in.next();
+        int result = minSteps(n, B);
+        System.out.println(result);
+    }
+}
+===================================================
+----PALEMDROME INDEX---
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    static int palindromeIndex(String s){     	      
+          int i = 0;
+	       if(isPalindrome(s)){
+	           return -1;
+	       }else{	    	   
+	           for(i=0 ; i<s.length();i++) {
+	        	   StringBuilder sb = new StringBuilder(s);
+	              if(isPalindrome(sb.deleteCharAt(i).toString())){	                  
+                      break;
+	              }
+	          }
+	       }
+	        return s.indexOf(s.charAt(i));
+    }
+    
+    private static boolean isPalindrome(String sb){
+	        StringBuilder s = new StringBuilder();	       
+	        for(int i= sb.length()-1;i>=0;i--){
+	            s = s.append(sb.charAt(i));
+	        }        	        
+	        return s.toString().equals(sb);
+	    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int q = in.nextInt();
+        for(int a0 = 0; a0 < q; a0++){
+            String s = in.next();
+            int result = palindromeIndex(s);
+            System.out.println(result);
+        }
+    }
+}
+==========================================================
+---ANAGRAM---
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    static int anagaram(String s){
+        if(s.length()%2!=0){
+			return -1;
+		}
+		
+		String s1 = s.substring(0, s.length()/2);
+		String s2 = s.substring(s.length()/2, s.length());
+		int count = 0;				
+		for(int i=0;i<s1.length();i++){
+			if(s2.indexOf(s1.charAt(i))<0){
+				count++;
+			}
+		}
+		return count;
+	}
+    
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int q = in.nextInt();
+        for(int a0 = 0; a0 < q; a0++){
+            String s = in.next();
+            int result = anagaram(s);
+            System.out.println(result);
+        }
+    }
+}
+==============================================================
 
