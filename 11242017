@@ -137,4 +137,82 @@ public class Solution {
    }
    }  
  =====================================================
+--Password Cracker--
 
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    
+    public static void printPassword(String[] strArr, String pwd){
+        
+        StringBuffer sb = new StringBuffer();
+        StringBuffer sbr = new StringBuffer();
+      
+        int index = 0;                   
+        int count = 0; 
+        boolean flag = false;
+        boolean found = false;
+            while(pwd.substring(index).length()>0){                      
+                for (int i = 0;i<strArr.length;i++){
+                 if(pwd.substring(index).startsWith(strArr[i])){
+                     sb = sb.append(strArr[i]).append(" ");                                     
+                     sbr = sbr.append(strArr[i]);                                     
+                     index += strArr[i].length();                                 
+                    count++;
+                 }                   
+                if(!pwd.contains(strArr[i])){                  
+                  flag = true;  
+                }    
+            }
+             if(flag)   {
+                 break;
+             }
+             
+            /* for(int i = 0; i<pwd.length();i++){
+                for (int k = 0;k<strArr.length;k++){
+                 if(Arrays.binarySearch(strArr[k].toCharArray() ,pwd.charAt(i))<0){                     
+                     
+                    found = true; 
+                 }
+             } 
+             }
+                if(found){
+                    break;
+                }*/
+               
+             
+            }
+      
+       
+        if(sbr.toString().equals(pwd)){
+            System.out.println(sb);    
+        }
+        else {
+             //System.out.println(sb);
+            System.out.println("WRONG PASSWORD");
+        }
+        
+        
+    }
+
+    public static void main(String[] args) {
+       Scanner in = new Scanner(System.in);
+       int k = in.nextInt();
+       for(int i=0;i<k;i++){           
+           int size = in.nextInt();
+           String[] strArr = new String[size];
+           
+           for(int j=0;j<size;j++){
+               strArr[j] = in.next();              
+           }           
+           String pwd = in.next();           
+           printPassword(strArr, pwd);
+       }
+        
+    }
+}
+======================================
