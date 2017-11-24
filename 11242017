@@ -1,0 +1,46 @@
+--------------------------------------------
+--Recursive Digit Sum--
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    static int superDigit(String n, int k) {
+        
+        StringBuffer sb = new StringBuffer();              
+        
+        for(int i=0;i<k;i++){            
+            sb = sb.append(n);
+        }        
+        int result = findSum(sb.toString());        
+        return result;
+        
+    }
+    
+     static int findSum(String s){         
+         int sum = 0;         
+         for(int i=0;i<s.length();i++){          
+             sum+= (s.charAt(i)-48);              
+         }         
+         if(sum>9){
+             sum = findSum(String.valueOf(sum));
+         }else{
+             return sum;
+         }
+         return sum;
+     }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String n = in.next();
+        int k = in.nextInt();
+        int result = superDigit(n, k);
+        System.out.println(result);
+        in.close();
+    }
+}
+=========================================================================================
