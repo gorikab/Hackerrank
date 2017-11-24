@@ -305,11 +305,12 @@ public class Solution {
 
     static long maximumSum(long[] a, long m) {
         
-        long max = 0l;
+        long max = 0;
         
         for(int i=0;i<a.length;i++){
-            long sum = 0;    
+            //long sum = 0;    
             for(int j=i;j<a.length;j++){
+                long sum = 0;
                 for(int k=i;k<=j;k++){                    
                  sum+=a[k];
                 }  
@@ -340,6 +341,7 @@ public class Solution {
         in.close();
     }
 }
+
 =================================================================
 ---PAIRS---
 
