@@ -74,6 +74,49 @@ public class Solution {
     }
 }
 ========================================================================
+---Ceaser Chipper---
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    
+    static void encryption(int n, String s, int k)
+    {
+   
+     StringBuilder sb = new StringBuilder();
+        
+        for (int i = 0; i < n; i++) {
+            char ch = s.charAt(i);
+            sb.append(encrypt(ch, k));
+        }
+        
+        System.out.println(sb);
+    }    
+    
+    private static char encrypt(char ch, int k) {
+        if (!Character.isLetter(ch)) {
+            return ch;
+        }
+        char base = Character.isLowerCase(ch) ? 'a' : 'A';
+        return (char) ((ch - base + k) % 26 + base);
+    }
+    
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        String s = in.next();
+        int k = in.nextInt();
+        
+      encryption(n,s,k);
+    }
+    
+}
+
+========================================================================
 ---PANGRAMS---
 
 import java.io.*;
