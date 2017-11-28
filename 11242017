@@ -147,60 +147,184 @@ import java.util.regex.*;
 
 public class Solution {
     
-    public static void printPassword(String[] strArr, String pwd){
-        
-        StringBuffer sb = new StringBuffer();
-        StringBuffer sbr = new StringBuffer();
-      
-        int index = 0;                                
-        boolean found = true;
-        
-        String input = Arrays.toString(strArr);
-        
-        for(int i = 0;i<pwd.length();i++){
-            if(!input.contains(Character.toString(pwd.charAt(i)))){
-                found = false;
-            }                      
-        }        
-        if(!found){
-            System.out.println("WRONG PASSWORD");
-       }  
-        else
-        {        
-            while(pwd.substring(index).length()>0){                      
-                for (int i = 0;i<strArr.length;i++){
-                 if(pwd.substring(index).startsWith(strArr[i])){
-                     sb = sb.append(strArr[i]).append(" ");                                     
-                     sbr = sbr.append(strArr[i]);                                     
-                     index += strArr[i].length();                                        
-                 }                                 
-            }
-             
-           }
-            if(sbr.toString().equals(pwd)){
-                System.out.println(sb);    
-            }
-            else {             
-                System.out.println("WRONG PASSWORD");
-            }
+    public static void printPassword(String[] a, String pass){
+    StringBuffer sb = new StringBuffer(); 
+    int f=0;
+       if(a.length <=10 ) {
+        for(int i=0;i<a.length;i++) {            
+            if(pass=="" || pass==" "  ||pass.length()==0 )
+            {       
+                f=1;
+                break;
+            }            
+            if(pass.startsWith(a[i]))
+            {    
+                sb = sb.append(a[i]).append(" ");
+                pass=pass.substring(a[i].length());             
+                i=-1;
+            }        
         }
-      
-    }
+       }
+        if(f==0){
+               System.out.println("WRONG PASSWORD");
+        }else{
+            System.out.print(sb);            
+             System.out.println();
+         }
+  }        
 
     public static void main(String[] args) {
        Scanner in = new Scanner(System.in);
-       int k = in.nextInt();
-       for(int i=0;i<k;i++){           
-           int size = in.nextInt();
-           String[] strArr = new String[size];
-           
-           for(int j=0;j<size;j++){
-               strArr[j] = in.next();              
-           }           
-           String pwd = in.next();           
-           printPassword(strArr, pwd);
-       }
+       int t = in.nextInt();
+       if(t<=10) {
+           for(int i=0;i<t;i++){
+               int n = in.nextInt();
+               if(n<=10){
+                    String[] strArr = new String[n];
+                    for(int j=0;j<n;j++){
+                        strArr[j] = in.next();              
+                    }
+                   String pwd = in.next();           
+               printPassword(strArr, pwd);   
+               }
+         }
+    }
+    }
+}
+===================================================
+---Fibonacci Modified---
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    public static void main(String args[] ) throws Exception {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+        Scanner in = new Scanner(System.in);
+         BigInteger t1 = in.nextBigInteger();
+        BigInteger t2 = in.nextBigInteger();
+        int n  = in.nextInt();
+        
+        BigInteger[] a = new BigInteger[n];        
+        a[0] = t1;
+        a[1] = t2;
+      //  System.out.print(a[0]+" "+a[1]+" ");
+        for(int i = 2 ; i<n; i++){
+            a[i] = a[i-2].add(a[i-1].multiply(a[i-1]));
+        //    System.out.print(a[i]+" ");
+        }
+        
+        System.out.println(a[n-1]);
+        
         
     }
 }
-======================================
+=============================================================
+---sam-and-substrings---
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    
+    static void printOutput(String s){
+     
+     int sum=0;
+        
+     for( int i = 0 ; i < s.length() ; i++ )
+     {
+        for( int j = 1 ; j <= s.length() - i ; j++ )
+         {
+          //  System.out.print("-->"+Integer.valueOf(s.substring(i, i+j)));
+            sum+= Integer.valueOf(s.substring(i, i+j));           
+         }
+      }
+        System.out.println(sum);
+        
+    }
+    
+    public static void main(String args[] ) throws Exception {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+        Scanner in = new Scanner(System.in);
+        String s = in.next();
+        printOutput(s);
+    }
+}
+==================================================================
+-----Equal-Stacks---
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n1 = in.nextInt();
+        int n2 = in.nextInt();
+        int n3 = in.nextInt();
+        Queue<Integer> s1 = new LinkedList<Integer>();
+        Queue<Integer> s2 = new LinkedList<Integer>();
+        Queue<Integer> s3 = new LinkedList<Integer>();
+        
+        int h1 = 0; 
+        int h2 = 0; 
+        int h3 = 0; 
+        
+        int minStack; 
+        
+        //Initialize the stacks and their heights
+        for(int i = 0; i < n1; i++){
+            int cylinder = in.nextInt();
+            s1.add(cylinder);
+            h1 += cylinder;
+        }
+        
+        for(int i = 0; i < n2; i++){
+            int cylinder = in.nextInt();
+            s2.add(cylinder);
+            h2 += cylinder;
+        }
+        
+        for(int i = 0; i < n3; i++){
+            int cylinder = in.nextInt();
+            s3.add(cylinder);
+            h3 += cylinder;
+        }
+        minStack = Math.min(h1,Math.min(h2,h3));
+        
+        while(h1 != h2 || h1 != h3)
+        {
+            
+            while(h1 > minStack)
+            {
+                h1 -= s1.remove();
+            }
+            minStack = Math.min(h1,Math.min(h2,h3)); 
+            
+            
+            while(h2 > minStack)
+            {
+                h2 -= s2.remove();
+            }
+            minStack = Math.min(h1,Math.min(h2,h3)); 
+            
+            
+            while(h3 > minStack)
+            {
+                h3 -= s3.remove();
+            }
+            minStack = Math.min(h1,Math.min(h2,h3)); 
+        }
+        System.out.println(minStack);
+    }
+}
+=======================================================================
+
